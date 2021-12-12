@@ -1,0 +1,42 @@
+---
+- name: Set hostname
+  become: true
+  hostname:
+    name: "{{ inventory_hostname }}"
+
+- name: Create ssh-user group
+  group:
+    name: ssh-user
+    state: present
+
+- name: SSH Config
+  become: true
+  copy:
+    src: ../files/ssh/sshd_config
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+  register: sshd_config
+
+- name: Restart SSH
+  become: true
+  service:
+    name: sshd
+    state: restarted
+    enabled: true
+  when: sshd_config.changed
+
+- name: Enabled UFW
+  become: true
+  ufw:
+    state: enabled
+    policy: deny
+    direction: incoming
+
+- name: Allow SSH through Firewall
+  become: true
+  ufw:
+    rule: limit
+    port: 22
+    proto: tcp

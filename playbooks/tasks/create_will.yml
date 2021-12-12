@@ -1,0 +1,49 @@
+---
+- name: Create the Will user
+  become: true
+  user:
+    name: will
+    groups: sudo,ssh-user
+    state: present
+    shell: /bin/bash
+    system: false
+    createhome: true
+    append: true
+    home: /home/will
+
+- name: Add Wills ssh key
+  authorized_key:
+    user: will
+    state: present
+    manage_dir: true
+    key: "{{ lookup('file', '../files/users/will/ssh/id_ed25519.pub') }}"
+
+- name: Wills SSH config
+  copy:
+    src: ../files/users/will/ssh/config
+    dest: /home/will/.ssh/config
+    owner: will
+    group: will
+    mode: 0600
+
+- name: Wills Private key
+  copy:
+    src: ../files/users/will/ssh/id_ed25519
+    dest: /home/will/.ssh/id_ed25519
+    owner: will
+    group: will
+    mode: 0600
+
+- name: Wills Sudoers Entry
+  become: true
+  copy:
+    src: ../files/users/will/sudoers
+    dest: /etc/sudoers.d/will
+    owner: root
+    group: root
+    mode: 0440
+
+- name: Restore Wills dotfiles
+  become: true
+  become_user: will
+  shell: yadm clone git@github.com:willdeberry/dotFiles.git 2>/dev/null || yadm pull

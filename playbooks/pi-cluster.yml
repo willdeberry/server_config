@@ -1,0 +1,6 @@
+---
+- hosts: k3cluster
+  tasks:
+    - import_tasks: tasks/packages.yml
+    - import_tasks: tasks/system.yml
+    - import_tasks: tasks/create_will.yml
