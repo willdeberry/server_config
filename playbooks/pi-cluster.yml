@@ -4,3 +4,4 @@
     - import_tasks: tasks/packages.yml
     - import_tasks: tasks/system.yml
     - import_tasks: tasks/create_will.yml
+    - import_tasks: tasks/k3s.yml

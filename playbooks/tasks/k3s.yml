@@ -1,0 +1,48 @@
+---
+- name: Allow port 6443 for k3s
+  become: true
+  ufw:
+    rule: allow
+    port: 6443
+    proto: tcp
+
+- name: Allow port 8472 for Flannel
+  become: true
+  ufw:
+    rule: allow
+    port: 8472
+    proto: udp
+
+- name: Allow port 10250 for Metrics
+  become: true
+  ufw:
+    rule: allow
+    port: 10250
+    proto: tcp
+
+- name: Allow ports 2379-2380 for HA
+  become: true
+  ufw:
+    rule: allow
+    port: 2379:2380
+    proto: tcp
+
+- name: Install K3S on Master
+  become: true
+  shell: curl -sfL https://get.k3s.io | sh -
+  args:
+    creates: /usr/local/bin/k3s-uninstall.sh
+  when: inventory_hostname == 'pi-master'
+
+- name: K3 Master token
+  become: true
+  shell: cat /var/lib/rancher/k3s/server/node-token
+  register: k3_master_token
+  when: inventory_hostname == 'pi-master'
+
+- name: Install K3S on Nodes
+  become: true
+  shell: "curl -sfL https://get.k3s.io | K3S_URL=https://{{ hostvars['pi-master']['ansible_default_ipv4']['address'] }}:6443 K3S_TOKEN={{ hostvars['pi-master']['k3_master_token'].stdout }} sh -"
+  args:
+    creates: /usr/local/bin/k3s-agent-uninstall.sh
+  when: "'node' in inventory_hostname"
