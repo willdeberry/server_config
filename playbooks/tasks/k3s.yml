@@ -27,6 +27,12 @@
     port: 2379:2380
     proto: tcp
 
+- name: Install Packages for Kubernetes on Pis
+  become: true
+  apt:
+    pkg:
+    - linux-modules-extra-raspi
+
 - name: Install K3S on Master
   become: true
   shell: curl -sfL https://get.k3s.io | sh -
