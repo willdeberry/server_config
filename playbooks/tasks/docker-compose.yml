@@ -1,0 +1,25 @@
+---
+- name: Install Packages for Docker-Compose
+  become: true
+  apt:
+    pkg:
+    - docker-compose
+
+- name: Allow port 80 for HTTP
+  become: true
+  ufw:
+    rule: allow
+    port: 80
+    proto: tcp
+
+- name: Add user Will to the docker and plugdev group
+  become: true
+  user:
+    name: will
+    groups: docker,plugdev
+    append: true
+
+- name: Clone our docker configuration for this host
+  git:
+    repo: git@github.com:willdeberry/barstorage.git
+    dest: /home/will/docker

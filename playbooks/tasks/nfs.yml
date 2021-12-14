@@ -1,0 +1,12 @@
+---
+- name: Install Packages for NFS
+  become: true
+  apt:
+    pkg:
+    - nfs-kernel-server
+
+- name: Allow port 2049 for NFS
+  become: true
+  ufw:
+    rule: allow
+    port: 2049
