@@ -34,6 +34,14 @@
     group: will
     mode: 0600
 
+- name: Wills Public key
+  copy:
+    src: ../files/users/will/ssh/id_ed25519.pub
+    dest: /home/will/.ssh/id_ed25519.pub
+    owner: will
+    group: will
+    mode: 0600
+
 - name: Wills Sudoers Entry
   become: true
   copy:

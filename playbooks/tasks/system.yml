@@ -5,6 +5,7 @@
     name: "{{ inventory_hostname }}"
 
 - name: Create ssh-user group
+  become: true
   group:
     name: ssh-user
     state: present
