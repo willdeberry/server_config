@@ -13,6 +13,7 @@
     - git
     - hddtemp
     - htop
+    - lm-sensors
     - openssh-server
     - vim
     - yadm
