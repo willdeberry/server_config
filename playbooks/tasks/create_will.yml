@@ -55,3 +55,13 @@
   become: true
   become_user: will
   shell: yadm clone git@github.com:willdeberry/dotFiles.git 2>/dev/null || yadm pull
+
+- name: Install vim Ale plugin
+  become: true
+  become_user: will
+  git:
+    repo: https://github.com/dense-analysis/ale.git
+    dest: /home/will/.vim/pack/git-plugins/start/ale
+    depth: 1
+    clone: true
+    update: true
