@@ -1,0 +1,14 @@
+---
+- name: Allow ports for HTTP
+  become: true
+  ufw:
+    rule: allow
+    port: 80
+    proto: tcp
+
+- name: Allow ports for HTTPS
+  become: true
+  ufw:
+    rule: allow
+    port: 443
+    proto: tcp

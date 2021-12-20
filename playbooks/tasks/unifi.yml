@@ -1,0 +1,22 @@
+---
+- name: Allow port Unifi Device Comms
+  become: true
+  ufw:
+    rule: allow
+    port: 8080
+    proto: tcp
+
+- name: Allow port Unifi STUN
+  become: true
+  ufw:
+    rule: allow
+    port: 3478
+    proto: udp
+
+- name: Allow port AP Discovery
+  become: true
+  ufw:
+    rule: allow
+    port: 10001
+    proto: udp
+
