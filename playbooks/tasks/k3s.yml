@@ -52,3 +52,9 @@
   args:
     creates: /usr/local/bin/k3s-agent-uninstall.sh
   when: "'node' in inventory_hostname"
+
+- name: Clone our kubernetes config
+  git:
+    repo: git@github.com:willdeberry/bartender-kubernetes.git
+    dest: /home/will/bartender
+  when: inventory_hostname == 'pi-master'
