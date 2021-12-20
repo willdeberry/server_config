@@ -16,6 +16,7 @@
     - lm-sensors
     - nfs-common
     - openssh-server
+    - tree
     - vim
     - yadm
     - yamllint
