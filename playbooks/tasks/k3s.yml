@@ -3,28 +3,28 @@
   become: true
   ufw:
     rule: allow
-    port: 6443
+    port: '6443'
     proto: tcp
 
 - name: Allow port 8472 for Flannel
   become: true
   ufw:
     rule: allow
-    port: 8472
+    port: '8472'
     proto: udp
 
 - name: Allow port 10250 for Metrics
   become: true
   ufw:
     rule: allow
-    port: 10250
+    port: '10250'
     proto: tcp
 
 - name: Allow ports 2379-2380 for HA
   become: true
   ufw:
     rule: allow
-    port: 2379:2380
+    port: '2379:2380'
     proto: tcp
 
 - name: Install Packages for Kubernetes on Pis

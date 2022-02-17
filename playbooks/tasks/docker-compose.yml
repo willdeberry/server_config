@@ -9,7 +9,7 @@
   become: true
   ufw:
     rule: allow
-    port: 80
+    port: '80'
     proto: tcp
 
 - name: Add user Will to the docker and plugdev group

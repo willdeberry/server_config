@@ -9,4 +9,4 @@
   become: true
   ufw:
     rule: allow
-    port: 2049
+    port: '2049'
