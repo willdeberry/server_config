@@ -1,0 +1,14 @@
+---
+- hosts: discord
+  tasks:
+    - import_tasks: tasks/packages.yml
+    - import_tasks: tasks/system.yml
+    - import_tasks: tasks/create_will.yml
+    - import_tasks: tasks/docker-compose.yml
+    - import_tasks: tasks/opentelemetry.yml
+    - import_tasks: tasks/minecraft.yml
+
+    - name: Clone our docker configuration for this host
+      git:
+        repo: git@github.com:willdeberry/SudoBot.git
+        dest: /home/will/SudoBot
