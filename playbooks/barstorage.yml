@@ -5,3 +5,8 @@
     - import_tasks: tasks/system.yml
     - import_tasks: tasks/create_will.yml
     - import_tasks: tasks/docker-compose.yml
+
+    - name: Clone our docker configuration for this host
+      git:
+        repo: git@github.com:willdeberry/barstorage.git
+        dest: /home/will/docker
