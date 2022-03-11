@@ -1,0 +1,14 @@
+---
+- name: Allow ports 25565-25566 for Minecraft
+  become: true
+  ufw:
+    rule: allow
+    port: '25565:25566'
+    proto: tcp
+
+- name: Allow ports 25575-25576 for Minecraft
+  become: true
+  ufw:
+    rule: allow
+    port: '25575:25576'
+    proto: tcp
