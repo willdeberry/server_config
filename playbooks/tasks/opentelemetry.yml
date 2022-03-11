@@ -1,0 +1,57 @@
+---
+- name: Allow port 16686 for Jaeger
+  become: true
+  ufw:
+    rule: allow
+    port: '16686'
+    proto: any
+
+- name: Allow port 9411 for Zipkin
+  become: true
+  ufw:
+    rule: allow
+    port: '16686'
+    proto: any
+
+- name: Allow port 9090 for Prometheus
+  become: true
+  ufw:
+    rule: allow
+    port: '9090'
+    proto: any
+
+- name: Allow port 1888 for otel-collector
+  become: true
+  ufw:
+    rule: allow
+    port: '1888'
+    proto: any
+
+- name: Allow port 8888:8889 for otel-collector
+  become: true
+  ufw:
+    rule: allow
+    port: '8888:8889'
+    proto: tcp
+
+- name: Allow port 13133 for otel-collector
+  become: true
+  ufw:
+    rule: allow
+    port: '13133'
+    proto: any
+
+- name: Allow port 55670:55679 for otel-collector
+  become: true
+  ufw:
+    rule: allow
+    port: '55670:55679'
+    proto: tcp
+
+- name: Allow port 7080 for otel-collector server
+  become: true
+  ufw:
+    rule: allow
+    port: '7080'
+    proto: any
+
