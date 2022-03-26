@@ -4,6 +4,11 @@
   hostname:
     name: "{{ inventory_hostname }}"
 
+- name: Set the proper timezone
+  become: true
+  timezone:
+    name: America/New_York
+
 - name: Create ssh-user group
   become: true
   group:
