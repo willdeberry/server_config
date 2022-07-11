@@ -10,3 +10,9 @@
       git:
         repo: git@github.com:willdeberry/barstorage.git
         dest: /home/will/docker
+
+    - name: Install Packages for Barstorage
+      become: true
+      apt:
+        pkg:
+        - unrar
