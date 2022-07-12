@@ -5,10 +5,53 @@
     - import_tasks: tasks/system.yml
     - import_tasks: tasks/create_will.yml
     - import_tasks: tasks/docker-compose.yml
-    - import_tasks: tasks/opentelemetry.yml
-    - import_tasks: tasks/minecraft.yml
 
     - name: Clone our docker configuration for this host
       git:
         repo: git@github.com:willdeberry/SudoBot.git
         dest: /home/will/SudoBot
+
+    - name: SudoBot service env file
+      copy:
+        src: ../files/sudobot/service.env
+        dest: /home/will/SudoBot/service/.env
+        owner: will
+        group: will
+        mode: 0644
+
+    - name: SudoBot webhook env file
+      copy:
+        src: ../files/sudobot/webhooks.env
+        dest: /home/will/SudoBot/webhooks/.env
+        owner: will
+        group: will
+        mode: 0644
+
+    - name: Create nginx cert dir
+      file:
+        path: /home/will/SudoBot/nginx/certs
+        state: directory
+        mode: 0755
+        group: will
+        owner: will
+
+    - name: SudoBot nginx private key
+      copy:
+        src: ../files/sudobot/discord.sudoservers.key
+        dest: /home/will/SudoBot/nginx/certs/discord.sudoservers.key
+        owner: will
+        group: will
+        mode: 0644
+
+    - name: SudoBot nginx cert
+      copy:
+        src: ../files/sudobot/discord.sudoservers.pem
+        dest: /home/will/SudoBot/nginx/certs/discord.sudoservers.pem
+        owner: will
+        group: will
+        mode: 0644
+
+    - name: Start up SudoBot
+      command:
+        cmd: docker-compose up -d
+        chdir: /home/will/SudoBot
