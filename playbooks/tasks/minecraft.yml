@@ -12,3 +12,50 @@
     rule: allow
     port: '25575:25576'
     proto: tcp
+
+- name: Clone our docker configuration for this host
+  git:
+    repo: git@github.com:willdeberry/minecraft-server.git
+    dest: /home/will/minecraft
+
+- name: Pull down josh's minecraft files
+  command:
+    cmd: aws s3 sync s3://sudoservers-minecraft/joshmc joshmc
+    chdir: /home/will/minecraft
+    creates: /home/will/minecraft/joshmc/world
+
+- name: Pull down logan's minecraft files
+  command:
+    cmd: aws s3 sync s3://sudoservers-minecraft/loganmc loganmc
+    chdir: /home/will/minecraft
+    creates: /home/will/minecraft/loganmc/world
+
+- name: Minecraft backup timer
+  become: true
+  copy:
+    src: ../files/minecraft/minecraft-backup.timer
+    dest: /etc/systemd/system/minecraft-backup.timer
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Minecraft backup service
+  become: true
+  copy:
+    src: ../files/minecraft/minecraft-backup.service
+    dest: /etc/systemd/system/minecraft-backup.service
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Enable timer for minecraft backup
+  become: true
+  systemd:
+    name: minecraft-backup.timer
+    state: started
+    enabled: true
+    daemon-reload: true
+- name: Start up minecraft
+  command:
+    cmd: docker-compose up -d
+    chdir: /home/will/minecraft
