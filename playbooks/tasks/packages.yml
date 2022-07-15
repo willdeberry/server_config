@@ -12,6 +12,7 @@
   apt:
     pkg:
     - ack
+    - bash-completion
     - git
     - hddtemp
     - htop
@@ -19,6 +20,7 @@
     - nfs-common
     - openssh-server
     - tree
+    - ufw
     - vim
     - yadm
     - yamllint
