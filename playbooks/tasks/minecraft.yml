@@ -18,6 +18,13 @@
     repo: git@github.com:willdeberry/minecraft-server.git
     dest: /home/will/minecraft
 
+- name: Add kids public ssh key for SFTP
+  authorized_key:
+    user: will
+    state: present
+    manage_dir: true
+    key: "{{ lookup('file', '../files/minecraft/sftp-ssh-key.pub') }}"
+
 - name: Pull down josh's minecraft files
   command:
     cmd: aws s3 sync s3://sudoservers-minecraft/joshmc joshmc
@@ -55,6 +62,16 @@
     state: started
     enabled: true
     daemon-reload: true
+
+- name: Fix permissions for minecraft
+  become: true
+  file:
+    path: /home/will/minecraft
+    owner: will
+    group: will
+    recurse: true
+    state: directory
+
 - name: Start up minecraft
   command:
     cmd: docker-compose up -d
