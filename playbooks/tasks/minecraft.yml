@@ -6,6 +6,32 @@
     port: '25565:25566'
     proto: tcp
 
+- name: Fix docker to user mapping on AWS boxes
+  become: true
+  copy:
+    src: ../files/minecraft/subuid
+    dest: /etc/subuid
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Depoy docker daemon config
+  become: true
+  copy:
+    src: ../files/minecraft/docker-daemon.json
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: 0644
+  register: docker_daemon_config
+
+- name: Restart the docker service
+  become: true
+  service:
+    name: docker.service
+    state: restarted
+  when: docker_daemon_config.changed
+
 - name: Allow ports 25575-25576 for Minecraft
   become: true
   ufw:
@@ -55,10 +81,44 @@
     group: root
     mode: 0644
 
+- name: Minecraft restart timer
+  become: true
+  copy:
+    src: ../files/minecraft/minecraft-restart@.timer
+    dest: /etc/systemd/system/minecraft-restart@.timer
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Minecraft restart service
+  become: true
+  copy:
+    src: ../files/minecraft/minecraft-restart@.service
+    dest: /etc/systemd/system/minecraft-restart@.service
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Enable timer for minecraft backup
   become: true
   systemd:
     name: minecraft-backup.timer
+    state: started
+    enabled: true
+    daemon-reload: true
+
+- name: Enable timer for minecraft restart for joshmc
+  become: true
+  systemd:
+    name: minecraft-restart@joshmc.timer
+    state: started
+    enabled: true
+    daemon-reload: true
+
+- name: Enable timer for minecraft restart for loganmc
+  become: true
+  systemd:
+    name: minecraft-restart@loganmc.timer
     state: started
     enabled: true
     daemon-reload: true
