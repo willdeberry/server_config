@@ -14,7 +14,6 @@
     - ack
     - bash-completion
     - git
-    - hddtemp
     - htop
     - lm-sensors
     - nfs-common
