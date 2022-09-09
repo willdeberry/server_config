@@ -17,3 +17,4 @@
       apt:
         pkg:
         - unrar
+        - tailscale
