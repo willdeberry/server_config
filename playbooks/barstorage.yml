@@ -11,6 +11,7 @@
       become: true
       apt:
         pkg:
+        - ansible
         - unrar
         - tailscale
         - zfsutils-linux
