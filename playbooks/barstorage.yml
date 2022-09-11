@@ -7,9 +7,29 @@
     - import_tasks: tasks/nginx.yml
     - import_tasks: tasks/docker-compose.yml
 
+    - name: Clone the ansible repo
+      git:
+        repo: git@github.com:willdeberry/server_config.git
+        dest: /home/will/server_config
+
+    - name: Setup tailscale repo gpg key
+      become: true
+      uri:
+        url: https://pkgs.tailscale.com/stable/ubuntu/jammy.noarmor.gpg
+        method: GET
+        dest: /usr/share/keyrings/tailscale-archive-keyring.gpg
+
+    - name: Setup tailscale repo url
+      become: true
+      uri:
+        url: https://pkgs.tailscale.com/stable/ubuntu/jammy.tailscale-keyring.list
+        method: GET
+        dest: /etc/apt/sources.list.d/tailscale.list
+
     - name: Install Packages for Barstorage
       become: true
       apt:
+        update_cache: true
         pkg:
         - ansible
         - unrar
