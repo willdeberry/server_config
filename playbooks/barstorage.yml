@@ -7,14 +7,10 @@
     - import_tasks: tasks/nginx.yml
     - import_tasks: tasks/docker-compose.yml
 
-    - name: Clone our docker configuration for this host
-      git:
-        repo: git@github.com:willdeberry/barstorage.git
-        dest: /home/will/docker
-
     - name: Install Packages for Barstorage
       become: true
       apt:
         pkg:
         - unrar
         - tailscale
+        - zfsutils-linux
