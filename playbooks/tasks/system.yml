@@ -18,7 +18,7 @@
 - name: SSH Config
   become: true
   copy:
-    src: ../files/ssh/sshd_config
+    src: ../../files/ssh/sshd_config
     dest: /etc/ssh/sshd_config
     owner: root
     group: root

@@ -16,11 +16,11 @@
     user: will
     state: present
     manage_dir: true
-    key: "{{ lookup('file', '../files/users/will/ssh/id_ed25519.pub') }}"
+    key: "{{ lookup('file', '../../files/users/will/ssh/id_ed25519.pub') }}"
 
 - name: Wills SSH config
   copy:
-    src: ../files/users/will/ssh/config
+    src: ../../files/users/will/ssh/config
     dest: /home/will/.ssh/config
     owner: will
     group: will
@@ -28,7 +28,7 @@
 
 - name: Wills Private key
   copy:
-    src: ../files/users/will/ssh/id_ed25519
+    src: ../../files/users/will/ssh/id_ed25519
     dest: /home/will/.ssh/id_ed25519
     owner: will
     group: will
@@ -36,7 +36,7 @@
 
 - name: Wills Public key
   copy:
-    src: ../files/users/will/ssh/id_ed25519.pub
+    src: ../../files/users/will/ssh/id_ed25519.pub
     dest: /home/will/.ssh/id_ed25519.pub
     owner: will
     group: will
@@ -45,7 +45,7 @@
 - name: Wills Sudoers Entry
   become: true
   copy:
-    src: ../files/users/will/sudoers
+    src: ../../files/users/will/sudoers
     dest: /etc/sudoers.d/will
     owner: root
     group: root

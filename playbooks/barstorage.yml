@@ -7,11 +7,6 @@
     - import_tasks: tasks/nginx.yml
     - import_tasks: tasks/docker-compose.yml
 
-    - name: Clone the ansible repo
-      git:
-        repo: git@github.com:willdeberry/server_config.git
-        dest: /home/will/server_config
-
     - name: Setup tailscale repo gpg key
       become: true
       uri:
@@ -34,4 +29,5 @@
         - ansible
         - unrar
         - tailscale
+        - tmux
         - zfsutils-linux

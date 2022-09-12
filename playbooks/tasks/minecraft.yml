@@ -9,7 +9,7 @@
 - name: Fix docker to user mapping on AWS boxes
   become: true
   copy:
-    src: ../files/minecraft/subuid
+    src: ../../files/minecraft/subuid
     dest: /etc/subuid
     owner: root
     group: root
@@ -18,7 +18,7 @@
 - name: Depoy docker daemon config
   become: true
   copy:
-    src: ../files/minecraft/docker-daemon.json
+    src: ../../files/minecraft/docker-daemon.json
     dest: /etc/docker/daemon.json
     owner: root
     group: root
@@ -49,7 +49,7 @@
     user: will
     state: present
     manage_dir: true
-    key: "{{ lookup('file', '../files/minecraft/sftp-ssh-key.pub') }}"
+    key: "{{ lookup('file', '../../files/minecraft/sftp-ssh-key.pub') }}"
 
 - name: Pull down josh's minecraft files
   command:
@@ -66,7 +66,7 @@
 - name: Minecraft backup timer
   become: true
   copy:
-    src: ../files/minecraft/minecraft-backup.timer
+    src: ../../files/minecraft/minecraft-backup.timer
     dest: /etc/systemd/system/minecraft-backup.timer
     owner: root
     group: root
@@ -75,7 +75,7 @@
 - name: Minecraft backup service
   become: true
   copy:
-    src: ../files/minecraft/minecraft-backup.service
+    src: ../../files/minecraft/minecraft-backup.service
     dest: /etc/systemd/system/minecraft-backup.service
     owner: root
     group: root
@@ -84,7 +84,7 @@
 - name: Minecraft restart timer
   become: true
   copy:
-    src: ../files/minecraft/minecraft-restart@.timer
+    src: ../../files/minecraft/minecraft-restart@.timer
     dest: /etc/systemd/system/minecraft-restart@.timer
     owner: root
     group: root
@@ -93,7 +93,7 @@
 - name: Minecraft restart service
   become: true
   copy:
-    src: ../files/minecraft/minecraft-restart@.service
+    src: ../../files/minecraft/minecraft-restart@.service
     dest: /etc/systemd/system/minecraft-restart@.service
     owner: root
     group: root

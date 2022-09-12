@@ -14,7 +14,7 @@
 
     - name: SudoBot service env file
       copy:
-        src: ../files/sudobot/service.env
+        src: ../../files/sudobot/service.env
         dest: /home/will/SudoBot/service/.env
         owner: will
         group: will
@@ -22,7 +22,7 @@
 
     - name: SudoBot webhook env file
       copy:
-        src: ../files/sudobot/webhooks.env
+        src: ../../files/sudobot/webhooks.env
         dest: /home/will/SudoBot/webhooks/.env
         owner: will
         group: will
@@ -38,7 +38,7 @@
 
     - name: SudoBot nginx private key
       copy:
-        src: ../files/sudobot/discord.sudoservers.key
+        src: ../../files/sudobot/discord.sudoservers.key
         dest: /home/will/SudoBot/nginx/certs/discord.sudoservers.key
         owner: will
         group: will
@@ -46,7 +46,7 @@
 
     - name: SudoBot nginx cert
       copy:
-        src: ../files/sudobot/discord.sudoservers.pem
+        src: ../../files/sudobot/discord.sudoservers.pem
         dest: /home/will/SudoBot/nginx/certs/discord.sudoservers.pem
         owner: will
         group: will
