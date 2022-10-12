@@ -1,0 +1,24 @@
+---
+- name: Allow port 8581 for homebridge UI
+  become: true
+  ufw:
+    rule: allow
+    port: '8581'
+
+- name: Allow port 51888 for homebridge mDNS
+  become: true
+  ufw:
+    rule: allow
+    port: '51888'
+
+- name: Allow port 31033 for homebridge MyQ
+  become: true
+  ufw:
+    rule: allow
+    port: '31033'
+
+- name: Allow port 58292 for homebridge Tesla
+  become: true
+  ufw:
+    rule: allow
+    port: '58292'
