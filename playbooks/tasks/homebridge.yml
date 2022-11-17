@@ -17,8 +17,8 @@
     rule: allow
     port: '31033'
 
-- name: Allow port 58292 for homebridge Tesla
+- name: Allow port 51633 for homebridge Switch
   become: true
   ufw:
     rule: allow
-    port: '58292'
+    port: '51633'
