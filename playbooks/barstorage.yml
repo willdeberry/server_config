@@ -33,3 +33,17 @@
         - tailscale
         - tmux
         - zfsutils-linux
+
+    - name: Allow port 41641 for tailscale
+      become: true
+      ufw:
+        rule: allow
+        port: '41641'
+        proto: udp
+
+    - name: Allow port 11434 for ollama AI
+      become: true
+      ufw:
+        rule: allow
+        port: '11434'
+        proto: tcp
