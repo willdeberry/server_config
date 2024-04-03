@@ -38,16 +38,16 @@
 
     - name: SudoBot nginx private key
       copy:
-        src: ../../files/sudobot/discord.sudoservers.key
-        dest: /home/will/SudoBot/nginx/certs/discord.sudoservers.key
+        src: ../../files/sudobot/STAR_sudoservers_com.key
+        dest: /home/will/SudoBot/nginx/certs/STAR_sudoservers_com.key
         owner: will
         group: will
         mode: 0644
 
     - name: SudoBot nginx cert
       copy:
-        src: ../../files/sudobot/discord.sudoservers.pem
-        dest: /home/will/SudoBot/nginx/certs/discord.sudoservers.pem
+        src: ../../files/sudobot/STAR_sudoservers_com.crt
+        dest: /home/will/SudoBot/nginx/certs/STAR_sudoservers_com.crt
         owner: will
         group: will
         mode: 0644
