@@ -9,3 +9,27 @@
     - import_tasks: tasks/pihole.yml
     - import_tasks: tasks/transmission.yml
     - import_tasks: tasks/unifi.yml
+
+    - name: Create cert dir
+      file:
+        path: /home/will/certs
+        state: directory
+        mode: 0755
+        group: will
+        owner: will
+
+    - name: SudoBot nginx private key
+      copy:
+        src: ../../files/sudobot/STAR_sudoservers_com.key
+        dest: /home/will/certs/STAR_sudoservers_com.key
+        owner: will
+        group: will
+        mode: 0644
+
+    - name: SudoBot nginx cert
+      copy:
+        src: ../../files/sudobot/STAR_sudoservers_com.crt
+        dest: /home/will/certs/STAR_sudoservers_com.crt
+        owner: will
+        group: will
+        mode: 0644
