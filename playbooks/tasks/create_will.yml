@@ -51,6 +51,15 @@
     group: root
     mode: 0440
 
+- name: Create diff-highlight symlink
+  become: true
+  file:
+    src: /usr/share/doc/git/contrib/diff-highlight/diff-highlight
+    path: /usr/local/bin/diff-highlight
+    follow: false
+    force: true
+    state: link
+
 - name: Restore Wills dotfiles
   become: true
   become_user: will
