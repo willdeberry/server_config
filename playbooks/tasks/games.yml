@@ -1,0 +1,14 @@
+---
+- name: Allow port 7777 for satisfactory
+  become: true
+  ufw:
+    rule: allow
+    port: '7777'
+    proto: any
+
+- name: Allow port 7778 for satisfactory-sean
+  become: true
+  ufw:
+    rule: allow
+    port: '7778'
+    proto: any

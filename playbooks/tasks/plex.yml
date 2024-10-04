@@ -1,0 +1,21 @@
+---
+- name: Allow port 32400 for Plex
+  become: true
+  ufw:
+    rule: allow
+    port: '32400'
+    proto: tcp
+
+- name: Allow port 32469 for satisfactory-sean
+  become: true
+  ufw:
+    rule: allow
+    port: '32469'
+    proto: udp
+
+- name: Allow port 5353 for satisfactory-sean
+  become: true
+  ufw:
+    rule: allow
+    port: '5353'
+    proto: udp
