@@ -51,8 +51,16 @@
     group: root
     mode: 0440
 
+- name: Make diff-highlight executable
+  become: true
+  when: ansible_architecture != 'aarch64'
+  file:
+    path: /usr/share/doc/git/contrib/diff-highlight/diff-highlight
+    mode: 0755
+
 - name: Create diff-highlight symlink
   become: true
+  when: ansible_architecture != 'aarch64'
   file:
     src: /usr/share/doc/git/contrib/diff-highlight/diff-highlight
     path: /usr/local/bin/diff-highlight
@@ -63,7 +71,7 @@
 - name: Restore Wills dotfiles
   become: true
   become_user: will
-  shell: yadm clone git@github.com:willdeberry/dotFiles.git 2>/dev/null || yadm pull
+  shell: yadm clone git@github.com:willdeberry/dotFiles.git 2>/dev/null || yadm pull || true
 
 - name: Install vim Ale plugin
   become: true

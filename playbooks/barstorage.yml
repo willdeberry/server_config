@@ -4,9 +4,14 @@
     - import_tasks: tasks/packages.yml
     - import_tasks: tasks/system.yml
     - import_tasks: tasks/create_will.yml
+    - import_tasks: tasks/games.yml
     - import_tasks: tasks/nginx.yml
     - import_tasks: tasks/nfs.yml
     - import_tasks: tasks/homebridge.yml
+    - import_tasks: tasks/pihole.yml
+    - import_tasks: tasks/plex.yml
+    - import_tasks: tasks/transmission.yml
+    - import_tasks: tasks/unifi.yml
     - import_tasks: tasks/docker-compose.yml
 
     - name: Setup tailscale repo gpg key

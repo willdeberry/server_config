@@ -11,14 +11,14 @@
     rule: allow
     port: '51888'
 
-- name: Allow port 31033 for homebridge MyQ
-  become: true
-  ufw:
-    rule: allow
-    port: '31033'
-
 - name: Allow port 51633 for homebridge Switch
   become: true
   ufw:
     rule: allow
     port: '51633'
+
+- name: Allow port 46495 for homebridge shark vaccum plugin
+  become: true
+  ufw:
+    rule: allow
+    port: '46495'
