@@ -4,7 +4,7 @@
   ufw:
     rule: allow
     port: '8080'
-    proto: tcp
+    proto: any
 
 - name: Allow port Unifi STUN
   become: true
