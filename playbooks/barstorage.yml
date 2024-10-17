@@ -8,7 +8,6 @@
     - import_tasks: tasks/nginx.yml
     - import_tasks: tasks/nfs.yml
     - import_tasks: tasks/homebridge.yml
-    - import_tasks: tasks/pihole.yml
     - import_tasks: tasks/plex.yml
     - import_tasks: tasks/transmission.yml
     - import_tasks: tasks/unifi.yml
